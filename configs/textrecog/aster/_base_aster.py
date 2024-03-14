@@ -49,6 +49,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile', ignore_empty=True, min_size=5),
     dict(type='LoadOCRAnnotations', with_text=True),
     dict(type='Resize', scale=(256, 64)),
+    dict(type='PyramidRescale'),  # 自行添加的自行添加的自行添加的自行添加的自行添加的自行添加的自行添加的自行添加的自行添加的
     dict(
         type='PackTextRecogInputs',
         meta_keys=('img_path', 'ori_shape', 'img_shape', 'valid_ratio'))
