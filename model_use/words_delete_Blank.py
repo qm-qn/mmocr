@@ -1,6 +1,7 @@
 import os
 import json
 from PIL import Image, ImageDraw
+from tqdm import tqdm
 
 
 def crop_image(image_path, output_path):
@@ -8,15 +9,15 @@ def crop_image(image_path, output_path):
     # 打开图像
     img = Image.open(image_path)
 
-    print(image_path)
+    # print(image_path)
 
     # 将图像转换为灰度图
     img_gray = img.convert('L')
 
     # 获取图像尺寸
     width, height = img_gray.size
-    print("width: " + str(width))
-    print("height: " + str(height))
+    # print("width: " + str(width))
+    # print("height: " + str(height))
 
     black_color = 150
     row_color_threshold = 0.005
@@ -97,26 +98,51 @@ def crop_image(image_path, output_path):
         # img.save(output_path)
 
 
-def batch_process_images(folderIn_path, folderOut_path):
-    if not os.path.exists(folderOut_path):
-        os.makedirs(folderOut_path)
+def process_images_in_folder(folderIn_path, folder_save_folder):
+    if not os.path.exists(folder_save_folder):
+        os.makedirs(folder_save_folder)
+
+    # 获取总图片数量
+    total_images = count_images_in_folder(folderIn_path)
+
+    # 使用总图片数量初始化进度条
+    progress_bar = tqdm(total=total_images, desc='Processing images')
+
+    # 开始处理图片
     for filename in os.listdir(folderIn_path):
         fileInpath = os.path.join(folderIn_path, filename)
-        fileOutpath = os.path.join(folderOut_path, filename)
+        file_save_folder = os.path.join(folder_save_folder, filename)
         if os.path.isdir(fileInpath):
             # 如果是文件夹，则递归处理其中的图片
-            batch_process_images(fileInpath, fileOutpath)
+            process_images_in_folder(fileInpath, file_save_folder)
         elif filename.endswith(('.png', '.jpg', '.jpeg')):
             # 如果是图片文件，则进行处理
-            crop_image(fileInpath, fileOutpath)
+            crop_image(fileInpath, file_save_folder)
+            # 更新进度条
+            progress_bar.update(1)
+
+    # 关闭进度条
+    progress_bar.close()
+
+
+# 计算指定文件夹中图片文件的数量
+def count_images_in_folder(folder_path):
+    image_count = 0
+    for filename in os.listdir(folder_path):
+        fileInpath = os.path.join(folder_path, filename)
+        if os.path.isdir(fileInpath):
+            image_count += count_images_in_folder(fileInpath)
+        elif filename.endswith(('.png', '.jpg', '.jpeg')):
+            image_count += 1
+    return image_count
 
 
 if __name__ == "__main__":
-    input_folder = "ocren_test0304/save"  # 输入文件夹路径
-    output_folder = "ocren_test0309"  # 输出文件夹路径
-    batch_process_images(input_folder, output_folder)
+    input_folder = "data/ocren_00/save"  # 输入文件夹路径
+    output_folder = "data/ocren_00/view"  # 输出文件夹路径
     global paths
     paths = []
-    # 将路径列表写入到 JSON 文件中
-    with open(os.path.join(output_folder, "blankImg.json"), "w") as f:
-        json.dump(paths, f)
+    process_images_in_folder(input_folder, output_folder)
+    # # 将路径列表写入到 JSON 文件中
+    # with open(os.path.join(output_folder, "blankImg.json"), "w") as f:
+    #     json.dump(paths, f)
