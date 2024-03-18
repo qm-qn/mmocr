@@ -1,16 +1,16 @@
 # training schedule for 1x
 _base_ = [
     '_base_aster.py',
-    '../_base_/datasets/IAM.py',
+    '../_base_/datasets/TAL_OCR_ENG.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/IAM_schedule_adamw_cos_6e.py',
+    '../_base_/schedules/TAL_OCR_ENG_schedule_adamw_cos_6e.py',
 ]
 
 # dataset settings
 train_list = [
-    _base_.IAM_textrecog_train]
+    _base_.TAL_OCR_ENG_textrecog_train]
 test_list = [
-    _base_.IAM_textrecog_test]
+    _base_.TAL_OCR_ENG_textrecog_test]
 
 default_hooks = dict(logger=dict(type='LoggerHook', interval=50))
 
@@ -41,5 +41,5 @@ test_dataloader = dict(
 val_dataloader = test_dataloader
 
 val_evaluator = dict(
-    dataset_prefixes=['IAM'])
+    dataset_prefixes=['TAL_OCR_ENG'])
 test_evaluator = val_evaluator
