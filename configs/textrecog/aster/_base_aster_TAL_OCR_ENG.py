@@ -2,7 +2,7 @@
 _base_ = [
     '_base_aster.py',
     '../_base_/datasets/TAL_OCR_ENG.py',
-    '../_base_/default_runtime.py',
+    '../_base_/line_default_runtime.py',
     '../_base_/schedules/TAL_OCR_ENG_schedule_adamw_cos_6e.py',
 ]
 

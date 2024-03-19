@@ -1,16 +1,16 @@
 # training schedule for 1x
 _base_ = [
     '_base_aster.py',
-    '../_base_/datasets/ocren.py',
+    '../_base_/datasets/ocren2100.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/m_schedule_adamw_cos_6e.py',
+    '../_base_/schedules/ocren2100_schedule_adamw_cos_6e.py',
 ]
 
 # dataset settings
 train_list = [
-    _base_.ocren_textrecog_train]
+    _base_.ocren2100_textrecog_train]
 test_list = [
-    _base_.ocren_textrecog_test]
+    _base_.ocren2100_textrecog_test]
 
 default_hooks = dict(logger=dict(type='LoggerHook', interval=50))
 
@@ -41,5 +41,5 @@ test_dataloader = dict(
 val_dataloader = test_dataloader
 
 val_evaluator = dict(
-    dataset_prefixes=['ocren'])
+    dataset_prefixes=['ocren2100'])
 test_evaluator = val_evaluator
