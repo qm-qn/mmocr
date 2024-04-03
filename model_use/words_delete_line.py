@@ -207,8 +207,8 @@ def count_images_in_folder(folder_path):
 
 
 if __name__ == "__main__":
-    input_folder = "m_testout/testin"  # 输入文件夹路径
+    input_folder = "data/ocren2100/delete_stroke"  # 输入文件夹路径
     folder_path = os.path.dirname(input_folder)
-    save_folder = os.path.join("m_testout", "save")  # 处理后的文件夹路径
-    view_folder = os.path.join("m_testout", "view")  # 拼接图片文件夹路径
+    save_folder = os.path.join("delete_stroke_line_", "save")  # 处理后的文件夹路径
+    view_folder = os.path.join("delete_stroke_line_", "view")  # 拼接图片文件夹路径
     process_images_in_folder(input_folder, save_folder, view_folder)

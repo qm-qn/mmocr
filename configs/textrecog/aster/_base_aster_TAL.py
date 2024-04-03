@@ -1,16 +1,16 @@
 # training schedule for 1x
 _base_ = [
     '_base_aster.py',
-    '../_base_/datasets/TAL_OCR_ENG.py',
+    '../_base_/datasets/TAL.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/TAL_OCR_ENG_schedule_adamw_cos_6e.py',
+    '../_base_/schedules/TAL_schedule_adamw_cos_6e.py',
 ]
 
 # dataset settings
 train_list = [
-    _base_.TAL_OCR_ENG_textrecog_train]
+    _base_.TAL_textrecog_train]
 test_list = [
-    _base_.TAL_OCR_ENG_textrecog_test]
+    _base_.TAL_textrecog_test]
 
 default_hooks = dict(logger=dict(type='LoggerHook', interval=50))
 
@@ -41,8 +41,5 @@ test_dataloader = dict(
 val_dataloader = test_dataloader
 
 val_evaluator = dict(
-    dataset_prefixes=['TAL_OCR_ENG'])
+    dataset_prefixes=['TAL'])
 test_evaluator = val_evaluator
-
-# 断点路径
-load_from = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster_IAM_ocren2100_maxepochs96_Tmax8_etamin4e-6_lr1e-3/epoch_192.pth'

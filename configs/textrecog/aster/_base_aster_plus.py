@@ -1,34 +1,26 @@
 # training schedule for 1x
 _base_ = [
-    '../_base_/datasets/cocotextv2.py',
-    '../_base_/datasets/IAM.py',
-    '../_base_/datasets/cute80.py',
-    '../_base_/datasets/iiit5k.py',
-    '../_base_/datasets/svt.py',
-    '../_base_/datasets/svtp.py',
-    '../_base_/datasets/icdar2013.py',
-    '../_base_/datasets/icdar2015.py',
+    '../_base_/datasets/ocren2100.py',
+    '../_base_/datasets/TAL.py',
     '../_base_/default_runtime.py',
-    '../_base_/schedules/schedule_adamw_cos_6e.py',
+    '../_base_/schedules/plus_schedule_adamw_cos_6e.py',
     '_base_aster.py',
 ]
 
 # dataset settings
 train_list = [
-    _base_.cocotextv2_textrecog_train,
-    _base_.IAM_textrecog_train
+    _base_.ocren2100_textrecog_train,
+    _base_.TAL_textrecog_train
 ]
 test_list = [
-    _base_.cocotextv2_textrecog_test, _base_.IAM_textrecog_test,
-    _base_.cute80_textrecog_test, _base_.iiit5k_textrecog_test,
-    _base_.svt_textrecog_test, _base_.svtp_textrecog_test,
-    _base_.icdar2013_textrecog_test, _base_.icdar2015_textrecog_test
+    _base_.ocren2100_textrecog_test,
+    _base_.TAL_textrecog_test
 ]
 
 default_hooks = dict(logger=dict(type='LoggerHook', interval=50))
 
 train_dataset = dict(
-    type='ConcatDataset', ignore_keys='dataset_type', datasets=train_list, pipeline=_base_.train_pipeline)
+    type='ConcatDataset', datasets=train_list, pipeline=_base_.train_pipeline)
 test_dataset = dict(
     type='ConcatDataset', datasets=test_list, pipeline=_base_.test_pipeline)
 
@@ -54,5 +46,5 @@ test_dataloader = dict(
 val_dataloader = test_dataloader
 
 val_evaluator = dict(
-    dataset_prefixes=['COCOTEXTV2', 'IAM', 'CUTE80', 'IIIT5K', 'SVT', 'SVTP', 'IC13', 'IC15'])
+    dataset_prefixes=['ocren2100', 'TAL'])
 test_evaluator = val_evaluator

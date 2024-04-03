@@ -63,13 +63,13 @@ class ConcatDataset(MMENGINE_CONCATDATASET):
 
         self._metainfo = self.datasets[0].metainfo
 
-        if verify_meta:
-            # Only use metainfo of first dataset.
-            for i, dataset in enumerate(self.datasets, 1):
-                if self._metainfo != dataset.metainfo:
-                    raise ValueError(
-                        f'The meta information of the {i}-th dataset does not '
-                        'match meta information of the first dataset')
+        # if verify_meta:
+        #     # Only use metainfo of first dataset.
+        #     for i, dataset in enumerate(self.datasets, 1):
+        #         if self._metainfo != dataset.metainfo:
+        #             raise ValueError(
+        #                 f'The meta information of the {i}-th dataset does not '
+        #                 'match meta information of the first dataset')
 
         self._fully_initialized = False
         if not lazy_init:

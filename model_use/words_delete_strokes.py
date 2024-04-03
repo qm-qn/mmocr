@@ -117,7 +117,7 @@ def crop_image(image_path, file_save_folder, file_view_folder, noline_path):
     width, height = img.size
 
     line_black_color = 200
-    # word_black_color = 100
+    word_black_color = 100
     row_color_threshold = 0.4
     white_color = 255
     top_y_end = 1
@@ -180,7 +180,7 @@ def crop_image(image_path, file_save_folder, file_view_folder, noline_path):
         noline_path.append(image_path)
 
     delete_stroke(editable_pixels, width, height, line_y, top_y_end, top_black, bottom_y_end, bottom_black, white_color)
-    # delete_bottom_lines(editable_pixels, width, height, line_to_white, white_color, word_black_color)
+    delete_bottom_lines(editable_pixels, width, height, line_to_white, white_color, word_black_color)
 
     editable_image.save(file_save_folder)
 
@@ -242,7 +242,7 @@ def count_images_in_folder(folder_path):
 
 
 if __name__ == "__main__":
-    input_folder = "data/ocren2100/img_origin"  # 输入文件夹路径
+    input_folder = "123/a"  # 输入文件夹路径
     folder_path = os.path.dirname(input_folder)
     save_folder = os.path.join(folder_path, "delete_stroke")  # 处理后的文件夹路径
     view_folder = os.path.join(folder_path, "delete_stroke_view")  # 拼接图片文件夹路径
