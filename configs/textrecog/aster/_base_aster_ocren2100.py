@@ -43,3 +43,6 @@ val_dataloader = test_dataloader
 val_evaluator = dict(
     dataset_prefixes=['ocren2100'])
 test_evaluator = val_evaluator
+
+# 断点路径
+load_from = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster_IAM_maxepochs96_Tmax8_etamin4e-6_lr2e-4/epoch_96.pth'

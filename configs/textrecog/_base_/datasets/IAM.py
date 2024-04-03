@@ -1,4 +1,4 @@
-IAM_textrecog_data_root = 'data/IAM/words_original'        # 数据集根目录
+IAM_textrecog_data_root = 'data/IAM/words'        # 数据集根目录
 
 IAM_textrecog_train = dict(
     type='OCRDataset',

@@ -20,13 +20,13 @@ def find_innermost_folders(folder_path):
     return innermost_folders
 
 
-model_path = '/public/yuziyang/work_dirs/rec/noline/aster_IAM_maxepochs96_Tmax8_etamin8e-4_lr2e-4/_base_aster_IAM.py'
-weight_path = '/public/yuziyang/work_dirs/rec/noline/aster_IAM_maxepochs96_Tmax8_etamin8e-4_lr2e-4/epoch_96.pth'
+model_path = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster_IAM_ocren2100_TAL_OCR_ENG_maxepochs288_Tmax8_etamin4e-6_lr4e-4/20240321_002725/vis_data/config.py'
+weight_path = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster_IAM_ocren2100_TAL_OCR_ENG_maxepochs288_Tmax8_etamin4e-6_lr4e-4/epoch_288.pth'
 # 读取模型
 inferencer = TextRecInferencer(model=model_path, weights=weight_path, device='cuda:0')
 
-input_path = '/home/yuziyang/mmocr/ocren_test0304/save'
-output_path = 'test0307'
+input_path = 'm_testout/testin'
+output_path = 'm_testout/testout'
 if not os.path.exists(output_path):
     os.makedirs(output_path)
 innermost_folders = find_innermost_folders(input_path)

@@ -2,7 +2,7 @@
 _base_ = [
     '_base_aster.py',
     '../_base_/datasets/TAL_OCR_ENG.py',
-    '../_base_/line_default_runtime.py',
+    '../_base_/default_runtime.py',
     '../_base_/schedules/TAL_OCR_ENG_schedule_adamw_cos_6e.py',
 ]
 
@@ -43,3 +43,6 @@ val_dataloader = test_dataloader
 val_evaluator = dict(
     dataset_prefixes=['TAL_OCR_ENG'])
 test_evaluator = val_evaluator
+
+# 断点路径
+load_from = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster_IAM_ocren2100_maxepochs96_Tmax8_etamin4e-6_lr1e-3/epoch_192.pth'

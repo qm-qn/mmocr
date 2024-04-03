@@ -135,6 +135,10 @@ def crop_image(image_path, output_path, bad_img):
             left_bound = left_boundary[0]
             right_bound = right_boundary[-1]
 
+        # 变白的部分还原
+        for (change_x, change_y, color) in change_spot:
+            editable_pixels[change_x, change_y] = color
+
         top_bound = -1
         bottom_bound = -1
         # 寻找上边界
@@ -156,25 +160,17 @@ def crop_image(image_path, output_path, bad_img):
         if top_bound == -1 or bottom_bound == -1:
             print(image_path)
 
-        # 变白的部分还原
-        for (change_x, change_y, color) in change_spot:
-            editable_pixels[change_x, change_y] = color
+        # # 绘制矩形
+        # draw = ImageDraw.Draw(editable_image)
+        # if top_bound >= bottom_bound:
+        #     print("top_bound >= bottom_bound  " + image_path)
+        #     return
+        # draw.rectangle([left_bound, top_bound, right_bound, bottom_bound], outline='red')
+        # editable_image.save(output_path)
 
-        # 绘制矩形
-        # print("width: " + str(width))
-        # print("height: " + str(height))
-        # print("left: " + str(left_boundary))
-        # print("right: " + str(right_boundary))
-        # print("top: " + str(top_boundary))
-        # print("bottom: " + str(bottom_boundary))
-        # print("height * column_color_threshold: " + str(height * column_color_threshold))
-        # print("width * blank_distance: " + str(width * blank_distance))
-        draw = ImageDraw.Draw(editable_image)
-        if top_bound >= bottom_bound:
-            print("top_bound >= bottom_bound  " + image_path)
-            return
-        draw.rectangle([left_bound, top_bound, right_bound, bottom_bound], outline='red')
-        editable_image.save(output_path)
+        # 裁剪图片
+        cropped_img = editable_image.crop((left_bound, top_bound, right_bound, bottom_bound))
+        cropped_img.save(output_path)
 
 
 def process_images_in_folder(folderIn_path, folder_save_folder, bad_img):
