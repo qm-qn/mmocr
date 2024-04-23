@@ -14,7 +14,7 @@ def find_black(width, height, x, y, line_y):
     # 和横线连上了，不删，停止所有递归
     if connect == 1:
         return
-    if y == line_y:
+    if y >= line_y:
         connect = 1
         return
     if count > 900:
@@ -44,7 +44,7 @@ def delete_stroke(editable_pixels, width, height, line_y, top_y_end, top_black, 
         is_find = [[0 for j in range(height)] for i in range(width)]
         connect = 0
         count = 0
-        find_black(width, height, x, y, line_y)
+        find_black(width, height, x, y, min(line_y, int(height * 0.6)))
         # 如果没和下面连上，说明是杂笔画，删除
         if connect == 0:
             # 变白
@@ -116,11 +116,10 @@ def crop_image(image_path, file_save_folder, file_view_folder, noline_path):
     # 获取图像尺寸
     width, height = img.size
 
-    line_black_color = 200
-    word_black_color = 100
+    line_black_color = 240
     row_color_threshold = 0.4
     white_color = 255
-    top_y_end = 1
+    top_y_end = 2
     bottom_y_end = 1
 
     # 横线黑点
@@ -180,7 +179,7 @@ def crop_image(image_path, file_save_folder, file_view_folder, noline_path):
         noline_path.append(image_path)
 
     delete_stroke(editable_pixels, width, height, line_y, top_y_end, top_black, bottom_y_end, bottom_black, white_color)
-    delete_bottom_lines(editable_pixels, width, height, line_to_white, white_color, word_black_color)
+    # delete_bottom_lines(editable_pixels, width, height, line_to_white, white_color, word_black_color)
 
     editable_image.save(file_save_folder)
 
@@ -224,9 +223,9 @@ def process_images_in_folder(folderIn_path, folder_save_folder, folder_view_fold
     # 关闭进度条
     progress_bar.close()
 
-    # 保存json文件
-    with open(os.path.join("data/ocren2100", "noline.json"), "w") as f:
-        json.dump(noline_path, f)
+    # # 保存json文件
+    # with open(os.path.join("data/ocren2100", "noline.json"), "w") as f:
+    #     json.dump(noline_path, f)
 
 
 # 计算指定文件夹中图片文件的数量
@@ -242,7 +241,7 @@ def count_images_in_folder(folder_path):
 
 
 if __name__ == "__main__":
-    input_folder = "123/a"  # 输入文件夹路径
+    input_folder = "/home/yuziyang/mmocr/m_testout/newtest"  # 输入文件夹路径
     folder_path = os.path.dirname(input_folder)
     save_folder = os.path.join(folder_path, "delete_stroke")  # 处理后的文件夹路径
     view_folder = os.path.join(folder_path, "delete_stroke_view")  # 拼接图片文件夹路径

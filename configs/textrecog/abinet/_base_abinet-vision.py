@@ -1,6 +1,6 @@
 dictionary = dict(
     type='Dictionary',
-    dict_file='{{ fileDirname }}/../../../dicts/lower_english_digits.txt',
+    dict_file='{{ fileDirname }}/../../../dicts/m_english_digits_symbols.txt',  # '{{ fileDirname }}/../../../dicts/lower_english_digits.txt'
     with_start=True,
     with_end=True,
     same_start_end=True,

@@ -84,7 +84,7 @@ def crop_image(image_path, output_path, bad_img):
     # 获取图像尺寸
     width, height = img.size
 
-    black_color = 200
+    black_color = 180
     row_color_threshold = 0.005
     column_color_threshold = 0.03
     # blank_distance = 0.013
@@ -160,17 +160,17 @@ def crop_image(image_path, output_path, bad_img):
         if top_bound == -1 or bottom_bound == -1:
             print(image_path)
 
-        # # 绘制矩形
-        # draw = ImageDraw.Draw(editable_image)
-        # if top_bound >= bottom_bound:
-        #     print("top_bound >= bottom_bound  " + image_path)
-        #     return
-        # draw.rectangle([left_bound, top_bound, right_bound, bottom_bound], outline='red')
-        # editable_image.save(output_path)
+        # 绘制矩形
+        draw = ImageDraw.Draw(editable_image)
+        if top_bound >= bottom_bound:
+            print("top_bound >= bottom_bound  " + image_path)
+            return
+        draw.rectangle([left_bound, top_bound, right_bound, bottom_bound], outline='red')
+        editable_image.save(output_path)
 
-        # 裁剪图片
-        cropped_img = editable_image.crop((left_bound, top_bound, right_bound, bottom_bound))
-        cropped_img.save(output_path)
+        # # 裁剪图片
+        # cropped_img = editable_image.crop((left_bound, top_bound, right_bound, bottom_bound))
+        # cropped_img.save(output_path)
 
 
 def process_images_in_folder(folderIn_path, folder_save_folder, bad_img):
@@ -213,11 +213,11 @@ def count_images_in_folder(folder_path):
 
 
 if __name__ == "__main__":
-    input_folder = "data/ocren2100/delete_stroke"  # 输入文件夹路径
-    output_folder = "data/ocren2100/img"  # 输出文件夹路径
+    input_folder = "m_testout/delete_stroke"  # 输入文件夹路径
+    output_folder = "m_testout/m_image"  # 输出文件夹路径
     global paths
     bad_img = []
     process_images_in_folder(input_folder, output_folder, bad_img)
-    with open("data/ocren2100/badimg.txt", 'w') as file:
+    with open("m_testout/badimg.txt", 'w') as file:
         for img in bad_img:
             file.write(img + '\n')
