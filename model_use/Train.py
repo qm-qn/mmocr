@@ -5,8 +5,8 @@ import os
 def train():
     os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
-    model = 'satrn'
-    name = 'TAL'
+    model = 'nrtr'
+    name = 'TAL_ocren_IAM'
     # lr = optim_wrapper['optimizer']['lr']
     # lr = "{:.0e}".format(lr)
     # max_epochs = str(train_cfg['max_epochs'])

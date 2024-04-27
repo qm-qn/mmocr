@@ -79,10 +79,10 @@ def find_innermost_folders(folder_path):
     return innermost_folders
 
 
-model_path = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster/TAL_ocren_IAM__90/TAL_ocren_IAM.py'
-weight_path = '/public/yuziyang/work_dirs/rec/new_dict/lines/aster/TAL_ocren_IAM__90/epoch_90.pth'
+model_path = '/public/yuziyang/work_dirs/rec/new_dict/lines/satrn/TAL_ocren_IAM/TAL_ocren_IAM.py'
+weight_path = '/public/yuziyang/work_dirs/rec/new_dict/lines/satrn/TAL_ocren_IAM/epoch_20.pth'
 # 读取模型
-inferencer = TextRecInferencer(model=model_path, weights=weight_path, device='cuda:0')
+inferencer = TextRecInferencer(model=model_path, weights=weight_path, device='cuda:1')
 
 input_path = 'm_testout/m_img'
 output_path = 'm_testout/TAL_ocren_IAM'
